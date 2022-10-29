@@ -5,9 +5,9 @@ const router = express.Router();
 
 module.exports.ProductAPI = (app)=>{
     router
-        .get('/products',ProductControlller.getProducts)
-        .get('/products/:id',ProductControlller.getProduct)
-        .post('products',ProductControlller.createProduct);
+        .get('/',ProductControlller.getProducts)
+        .get('/:id',ProductControlller.getProduct)
+        .post('/',ProductControlller.createProduct);
 
-    app.use(router);
+    app.use('/products',router);
 }

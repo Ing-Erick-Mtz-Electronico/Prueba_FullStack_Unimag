@@ -1,4 +1,5 @@
 const {Database} = require('../database/index');
+const {ObjectId} = require('mongodb');
 
 const nameColletion = 'products';
 
@@ -11,16 +12,16 @@ const getAll = async()=>{
 }
 
 const getById = async (id)=>{
-
+    
     let collection = await Database(nameColletion);
-    let documentId = await collection.findOne({_id:id});
+    let documentId = await collection.findOne({_id: Number(id)});
     return documentId;
 }
 
 const create = async (body)=>{
     let collection = await Database(nameColletion);
     let response = await collection.insertOne(body);
-    response.insertedId = response.insertedId.toString();
+    
     return response;
 }
 

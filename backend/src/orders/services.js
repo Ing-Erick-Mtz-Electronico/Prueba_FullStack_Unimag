@@ -15,14 +15,13 @@ const getById = async (id)=>{
 
     let collection = await Database(nameColletion);
     let documentId = await collection.findOne({_id:ObjectId(id)});
-
     return documentId;
 }
 
 const create = async (body)=>{
     let collection = await Database(nameColletion);
     let response = await collection.insertOne(body);
-    response.insertedId = response.insertedId.toString();
+    
     return response;
 }
 

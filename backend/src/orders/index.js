@@ -5,9 +5,9 @@ const router = express.Router();
 
 module.exports.OrderAPI = (app)=>{
     router
-        .get('/orders',OrderControlller.getOrders)
-        .get('/orders/:id',OrderControlller.getOrder)
-        .post('orders',OrderControlller.createOrder);
+        .get('/',OrderControlller.getOrders)
+        .get('/:id',OrderControlller.getOrder)
+        .post('/',OrderControlller.createOrder);
 
-    app.use(router);
+    app.use('/orders',router);
 }

@@ -1,11 +1,11 @@
-const {ProductServices} = require('./services');
+const {OrderServices} = require('./services');
 const {Response} = require('../common/index');
 const createError = require('http-errors');
 
 const getOrders = async (req,res)=>{
     try {
-        let products = await ProductServices.getAll();
-        Response.success(res,200,'lista de productos',products);
+        let orders = await OrderServices.getAll();
+        Response.success(res,200,'lista de ordenes',orders);
 
     } catch (error) {
         Response.error(res);
@@ -16,11 +16,11 @@ const getOrder = async (req,res)=>{
     try {
 
         let {params:{id}} = req;
-        let product = await ProductServices.getById(id);
-        if (!product) {
+        let order = await OrderServices.getById(id);
+        if (!order) {
             Response.error(res,new createError.NotFound());
         } else {
-            Response.success(res,200,`producto ${id}`,product);
+            Response.success(res,200,`orden ${id}`,order);
         }
 
     } catch (error) {
@@ -36,8 +36,8 @@ const createOrder =async (req,res)=>{
             Response.error(res,new createError.BadRequest());
 
         } else {
-            let response = await ProductServices.create(body);
-            Response.success(res,201,'Producto Agregado',response);
+            let response = await OrderServices.create(body);
+            Response.success(res,201,'orden Agregada',response);
         }
     } catch (error) {
         Response.error(res);

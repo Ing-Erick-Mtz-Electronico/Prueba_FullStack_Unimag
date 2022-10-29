@@ -16,6 +16,7 @@ const getProduct = async (req,res)=>{
     try {
 
         let {params:{id}} = req;
+        
         let product = await ProductServices.getById(id);
         if (!product) {
             Response.error(res,new createError.NotFound());
@@ -31,7 +32,7 @@ const getProduct = async (req,res)=>{
 const createProduct =async (req,res)=>{
     try {
         let {body} = req;
-
+        
         if ( Object.keys(body).length === 0 ) {
             Response.error(res,new createError.BadRequest());
 

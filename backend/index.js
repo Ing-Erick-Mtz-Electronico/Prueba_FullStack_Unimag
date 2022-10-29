@@ -1,23 +1,22 @@
 const express = require('express');
 const {config} = require('../config/index');
-const {Response} = require('./src/common/index');
 const {ProductAPI} = require('./src/products/index');
 const {OrderAPI} = require('./src/orders/index');
+const {IndexAPI,NotFoudAPI} = require('./src/index/index')
+const cors = require('cors');
+
 
 const app = express();
 
+app.use(cors({origi:['http://127.0.0.1:5500/frontend/products/index.html']}));
 app.use(express.json());
 
-app.get('/',(req,res)=>{
-    let menu = {
-        producs:'api'
-    }
-    Response.success(res,200,'lista de productos',menu);
-})
-OrderAPI(app);
+
+IndexAPI(app);
 ProductAPI(app);
+OrderAPI(app);
+NotFoudAPI(app);
 
-
-app.listen(()=>{
-    console.log(`Servisor en el puerto ${config.port}`)
-},config.port)
+app.listen(config.port,()=>{
+    console.log(`Servidor en el puerto ${config.port}`);
+});
